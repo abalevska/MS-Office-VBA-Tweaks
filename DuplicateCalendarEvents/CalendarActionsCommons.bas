@@ -46,11 +46,8 @@ End Sub
 
 Function FindAppointment(ByVal globalAppointmentID As String, ByVal DestinationFolder As Outlook.folder) As AppointmentItem
     
-    Dim filter As String
-    filter = ItemsFilter()
-    
     Dim FilteredItems
-    Set FilteredItems = DestinationFolder.Items.Restrict(filter) ' performance optimization *(3) go to ReadMe module for more details;
+    Set FilteredItems = DestinationFolder.Items.Restrict(FilterItemsCategoryCopiedAndCurrent) ' performance optimization *(3) go to ReadMe module for more details;
 
     For Each objAppointment In FilteredItems
         If InStr(1, objAppointment.Body, globalAppointmentID) Then
@@ -62,15 +59,6 @@ End Function
 
 Function LastMonday(pdat As Date) As Date
     LastMonday = DateAdd("ww", -1, pdat - (Weekday(pdat, vbMonday) - 1))
-End Function
-
-Function ItemsFilter() As String
-   Dim FilterCategory
-   FilterCategory = "[Categories] = " & CopiesCategory
-   Dim FilterDate
-   FilterDate = "[Start] >= '" & Format(LastMonday(Now), "ddddd h:nn AMPM") & "'"
-   
-   'ItemsFilter = FilterCategory & " And (" & FilterDate & "Or ("&&")" &")"
 End Function
 
 Function FilterItemsCategoryCopied() As String
@@ -86,5 +74,12 @@ Function FilterItemsCategoryNotCopiedAndCurrent() As String
    FilterDate = "[Start] >= '" & Format(LastMonday(Now), "ddddd h:nn AMPM") & "'"
    
    FilterItemsCategoryNotCopiedAndCurrent = FilterItemsCategoryNotCopied & " And " & FilterDate
+End Function
+   
+Function FilterItemsCategoryCopiedAndCurrent() As String
+   Dim FilterDate
+   FilterDate = "[Start] >= '" & Format(LastMonday(Now), "ddddd h:nn AMPM") & "'"
+   
+   FilterItemsCategoryCopiedAndCurrent = FilterItemsCategoryCopied & " And " & FilterDate
 End Function
    
