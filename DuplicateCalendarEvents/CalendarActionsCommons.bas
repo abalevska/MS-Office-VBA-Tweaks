@@ -1,7 +1,7 @@
 Attribute VB_Name = "CalendarActionsCommons"
   
 Public Const SubjectPrefix = "C:"
-Public Const CopiesCategory = "Automatic Copy"
+Public Const CopiesCategory = "Automatic Copy" ' do not modify this after you've started using the script
 
 Public Const CalendarFolderName = "Calendar"
 Public Const DeletedItemsFolderName = "Deleted Items"
@@ -70,7 +70,7 @@ Function ItemsFilter() As String
    Dim FilterDate
    FilterDate = "[Start] >= '" & Format(LastMonday(Now), "ddddd h:nn AMPM") & "'"
    
-   ItemsFilter = FilterCategory & " And " & FilterDate
+   'ItemsFilter = FilterCategory & " And (" & FilterDate & "Or ("&&")" &")"
 End Function
 
 Function FilterItemsCategoryCopied() As String
@@ -80,3 +80,11 @@ End Function
 Function FilterItemsCategoryNotCopied() As String
     FilterItemsCategoryNotCopied = "[Categories] <> '" & CopiesCategory & "'"
 End Function
+
+Function FilterItemsCategoryNotCopiedAndCurrent() As String
+   Dim FilterDate
+   FilterDate = "[Start] >= '" & Format(LastMonday(Now), "ddddd h:nn AMPM") & "'"
+   
+   FilterItemsCategoryNotCopiedAndCurrent = FilterItemsCategoryNotCopied & " And " & FilterDate
+End Function
+   

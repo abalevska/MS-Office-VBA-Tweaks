@@ -13,12 +13,12 @@ Sub LoopsCopiedAppointmentItems()
     Dim filter As String
     filter = "[Categories] = 'Automatic Copy'"
     
-    Dim Folder As Outlook.Folder
+    Dim folder As Outlook.folder
     Dim FilteredItems
         
     For Each Account In Accounts
-        Set Folder = NS.Folders(Account).Folders(CalendarFolder)
-        Set FilteredItems = Folder.Items.Restrict(filter)
+        Set folder = NS.Folders(Account).Folders(CalendarFolder)
+        Set FilteredItems = folder.Items.Restrict(filter)
     
         For Each objAppointment In FilteredItems
             ' add whatever you want to do here

@@ -1,7 +1,7 @@
 Attribute VB_Name = "CopyApptItemsInitial"
    
-Dim calendarFolderDefault As Outlook.Folder
-Dim calendarFolderSecondary As Outlook.Folder
+Dim calendarFolderDefault As Outlook.folder
+Dim calendarFolderSecondary As Outlook.folder
 
 
 Sub CopyApptItemsInitial()
@@ -18,10 +18,10 @@ Sub CopyApptItemsInitial()
     Set NS = Nothing
 End Sub
 
-Sub CloneCalendar(ByRef sourceFolder As Outlook.Folder, ByRef destinationFolder As Outlook.Folder)
-    Set FilteredItems = sourceFolder.Items.Restrict(CalendarActionsCommons.FilterItemsCategoryNotCopied)
+Sub CloneCalendar(ByRef sourceFolder As Outlook.folder, ByRef DestinationFolder As Outlook.folder)
+    Set FilteredItems = sourceFolder.Items.Restrict(CalendarActionsCommons.FilterItemsCategoryNotCopiedAndCurrent)
         
     For Each objAppointment In FilteredItems
-        Call CalendarActionsCommons.CloneItem(objAppointment, destinationFolder)
+        Call CalendarActionsCommons.CloneItem(objAppointment, DestinationFolder)
     Next
 End Sub
