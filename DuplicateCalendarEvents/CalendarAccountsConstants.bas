@@ -1,14 +1,14 @@
+
 Attribute VB_Name = "CalendarAccountsConstants"
 
-Public Const DefaultEmail = "avasileva@objectsystems.com"
-Public Const SecondaryEmail = "avvasileva.cw@mmm.com"
+Public Const DefaultEmail = "your.email@yourorganization.com"
+Public Const SecondaryEmail = "your.email@clientorganization.com"
 
 Function Accounts() As String()
 
     Dim returnVal(1) As String
-    returnVal(0) = "avasileva@objectsystems.com"
-    returnVal(1) = "avvasileva.cw@mmm.com"
+    returnVal(0) = "your.email@yourorganization.com"
+    returnVal(1) = "your.email@yourorganization.com"
     
     Accounts = returnVal
 End Function
-
